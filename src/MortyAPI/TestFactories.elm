@@ -1,8 +1,24 @@
 module MortyAPI.TestFactories exposing (..)
 
+{-| Provides factory methods for testing purposes.
+
+@docs firstTask
+@docs secondTask
+@docs thirdTask
+@docs fourthTask
+@docs fifthTask
+@docs sixthTask
+@docs firstUser
+@docs secondUser
+@docs kanbanLanesSuccessResponse
+
+-}
+
 import MortyAPI.Models
 
 
+{-| A dummy feature task
+-}
 firstTask : MortyAPI.Models.KanbanTask
 firstTask =
     { daysSinceLastChanged = 79
@@ -15,6 +31,8 @@ firstTask =
     }
 
 
+{-| A dummy chore task
+-}
 secondTask : MortyAPI.Models.KanbanTask
 secondTask =
     { daysSinceLastChanged = 94
@@ -27,6 +45,8 @@ secondTask =
     }
 
 
+{-| A dummy feature task
+-}
 thirdTask : MortyAPI.Models.KanbanTask
 thirdTask =
     { daysSinceLastChanged = 78
@@ -39,6 +59,8 @@ thirdTask =
     }
 
 
+{-| A dummy feature task
+-}
 fourthTask : MortyAPI.Models.KanbanTask
 fourthTask =
     { daysSinceLastChanged = 85
@@ -51,6 +73,8 @@ fourthTask =
     }
 
 
+{-| A dummy feature task
+-}
 fifthTask : MortyAPI.Models.KanbanTask
 fifthTask =
     { daysSinceLastChanged = 77
@@ -63,6 +87,8 @@ fifthTask =
     }
 
 
+{-| A dummy feature task
+-}
 sixthTask : MortyAPI.Models.KanbanTask
 sixthTask =
     { daysSinceLastChanged = 78
@@ -75,16 +101,22 @@ sixthTask =
     }
 
 
+{-| A dummy user
+-}
 firstUser : MortyAPI.Models.KanbanUser
 firstUser =
     { email = "bentleigh.smith@bellroy.com", fullName = "Bentleigh Smith" }
 
 
+{-| A dummy user
+-}
 secondUser : MortyAPI.Models.KanbanUser
 secondUser =
     { email = "carlos.negros@bellroy.com", fullName = "Carlos Negros" }
 
 
+{-| A dummy full Kanban lanes response from the API
+-}
 kanbanLanesSuccessResponse : MortyAPI.Models.KanbanLanesSuccessResponse
 kanbanLanesSuccessResponse =
     { data =
