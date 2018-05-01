@@ -1,10 +1,10 @@
-module Tests.MortyAPI.DecodersTests exposing (..)
+module MortyAPI.DecodersTests exposing (..)
 
 import Expect
 import Json.Decode
 import MortyAPI.Decoders
 import Test exposing (..)
-import Tests.MortyAPI.Factories
+import MortyAPI.TestFactories
 
 
 suite : Test
@@ -168,7 +168,7 @@ suite =
                             Json.Decode.decodeString decoder data
 
                         expectedResult =
-                            (Ok Tests.MortyAPI.Factories.kanbanLanesSuccessResponse)
+                            (Ok MortyAPI.TestFactories.kanbanLanesSuccessResponse)
                     in
                         Expect.equal decodedOutput expectedResult
             ]

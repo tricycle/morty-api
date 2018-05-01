@@ -1,4 +1,4 @@
-module Tests.MortyAPI.Factories exposing (..)
+module MortyAPI.TestFactories exposing (..)
 
 import MortyAPI.Models
 

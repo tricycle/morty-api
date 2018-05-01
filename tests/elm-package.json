@@ -1,22 +1,17 @@
 {
     "version": "1.0.0",
-    "summary": "Morty API",
+    "summary": "Test Suites",
     "repository": "https://github.com/tricycle/morty-api.git",
     "license": "BSD3",
     "source-directories": [
-        "src"
+        "../src",
+        "."
     ],
-    "exposed-modules": [
-        "MortyAPI.Commands",
-        "MortyAPI.Decoders",
-        "MortyAPI.Encoders",
-        "MortyAPI.Models",
-        "MortyAPI.TestFactories",
-        "MortyAPI.Utilities"
-    ],
+    "exposed-modules": [],
     "dependencies": {
-        "NoRedInk/elm-decode-pipeline": "3.0.0 <= v < 4.0.0",
         "elm-lang/core": "5.0.0 <= v < 6.0.0",
+        "elm-community/elm-test": "4.0.0 <= v < 5.0.0",
+        "NoRedInk/elm-decode-pipeline": "3.0.0 <= v < 4.0.0",
         "elm-lang/http": "1.0.0 <= v < 2.0.0",
         "krisajenkins/remotedata": "4.5.0 <= v < 5.0.0"
     },

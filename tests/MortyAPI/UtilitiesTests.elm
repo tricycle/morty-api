@@ -1,9 +1,9 @@
-module Tests.MortyAPI.UtilitiesTests exposing (..)
+module MortyAPI.UtilitiesTests exposing (..)
 
 import Expect
 import MortyAPI.Utilities
 import Test exposing (..)
-import Tests.MortyAPI.Factories
+import MortyAPI.TestFactories
 
 
 suite : Test
@@ -14,7 +14,7 @@ suite =
                 \() ->
                     let
                         successResponse =
-                            Tests.MortyAPI.Factories.kanbanLanesSuccessResponse
+                            MortyAPI.TestFactories.kanbanLanesSuccessResponse
 
                         kanbanLanes =
                             successResponse.data.attributes
