@@ -9,6 +9,7 @@ module MortyAPI.Models
         , KanbanStageStatus(..)
         , KanbanStageStatusFields
         , KanbanTask
+        , KanbanTaskPriority(..)
         , KanbanTaskType(..)
         , KanbanUser
         , Task
@@ -29,6 +30,7 @@ module MortyAPI.Models
 @docs KanbanStageStatus
 @docs KanbanStageStatusFields
 @docs KanbanTask
+@docs KanbanTaskPriority
 @docs KanbanTaskType
 @docs KanbanUser
 @docs Task
@@ -98,9 +100,19 @@ type alias KanbanTask =
     , estimate : Maybe Int
     , mortyUrl : String
     , pivotalUrl : String
+    , priority : KanbanTaskPriority
     , requestedBy : Maybe String
     , taskType : KanbanTaskType
     }
+
+
+{-| The different task priorities with unique display properties
+-}
+type KanbanTaskPriority
+    = HighestPriority
+    | SecondHighestPriority
+    | ThirdHighestPriority
+    | LowerPriority
 
 
 {-| The different types a kanban task can be.

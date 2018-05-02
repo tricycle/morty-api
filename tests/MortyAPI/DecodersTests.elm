@@ -43,6 +43,7 @@ suite =
                                                     "estimate":16,
                                                     "morty_url":"https://morty.trikeapps.com/tasks/2485582",
                                                     "pivotal_url":"https://www.pivotaltracker.com/story/show/154507088",
+                                                    "priority":1,
                                                     "requested_by":"John Black",
                                                     "task_type":"feature"
                                                  }
@@ -61,6 +62,7 @@ suite =
                                                     "estimate":null,
                                                     "morty_url":"https://morty.trikeapps.com/tasks/2485504",
                                                     "pivotal_url":"https://www.pivotaltracker.com/story/show/154269718",
+                                                    "priority":2,
                                                     "requested_by":"Bill Fring",
                                                     "task_type":"chore"
                                                  }
@@ -93,6 +95,7 @@ suite =
                                                     "estimate":6,
                                                     "morty_url":"https://morty.trikeapps.com/tasks/2485277",
                                                     "pivotal_url":"https://www.pivotaltracker.com/story/show/152743157",
+                                                    "priority":3,
                                                     "requested_by":"Matt Bixby",
                                                     "task_type":"feature"
                                                  },
@@ -102,6 +105,7 @@ suite =
                                                     "estimate":10,
                                                     "morty_url":"https://morty.trikeapps.com/tasks/2485348",
                                                     "pivotal_url":"https://www.pivotaltracker.com/story/show/153040253",
+                                                    "priority":4,
                                                     "requested_by":"Matt Bixby",
                                                     "task_type":"feature"
                                                  }
@@ -116,6 +120,7 @@ suite =
                                                     "estimate":4,
                                                     "morty_url":"https://morty.trikeapps.com/tasks/2485581",
                                                     "pivotal_url":"https://www.pivotaltracker.com/story/show/154506909",
+                                                    "priority":5,
                                                     "requested_by":"Kris D'Angelici",
                                                     "task_type":"feature"
                                                  },
@@ -125,6 +130,7 @@ suite =
                                                     "estimate":6,
                                                     "morty_url":"https://morty.trikeapps.com/tasks/2485461",
                                                     "pivotal_url":"https://www.pivotaltracker.com/story/show/153866866",
+                                                    "priority":6,
                                                     "requested_by":"Kris D'Angelici",
                                                     "task_type":"feature"
                                                  }

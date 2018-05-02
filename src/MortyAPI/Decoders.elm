@@ -92,6 +92,26 @@ decodeKanbanTaskType =
             )
 
 
+decodeKanbanTaskPriority : JD.Decoder MortyAPI.Models.KanbanTaskPriority
+decodeKanbanTaskPriority =
+    (JD.nullable JD.int)
+        |> JD.andThen
+            (\maybeString ->
+                case maybeString of
+                    Just 1 ->
+                        JD.succeed MortyAPI.Models.HighestPriority
+
+                    Just 2 ->
+                        JD.succeed MortyAPI.Models.SecondHighestPriority
+
+                    Just 3 ->
+                        JD.succeed MortyAPI.Models.ThirdHighestPriority
+
+                    _ ->
+                        JD.succeed MortyAPI.Models.LowerPriority
+            )
+
+
 decodeKanbanTask : JD.Decoder MortyAPI.Models.KanbanTask
 decodeKanbanTask =
     JDP.decode MortyAPI.Models.KanbanTask
@@ -100,6 +120,7 @@ decodeKanbanTask =
         |> JDP.required "estimate" (JD.nullable JD.int)
         |> JDP.required "morty_url" JD.string
         |> JDP.required "pivotal_url" JD.string
+        |> JDP.required "priority" decodeKanbanTaskPriority
         |> JDP.required "requested_by" (JD.nullable JD.string)
         |> JDP.required "task_type" decodeKanbanTaskType
 

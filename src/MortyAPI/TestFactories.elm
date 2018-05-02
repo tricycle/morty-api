@@ -26,6 +26,7 @@ firstTask =
     , estimate = Just 16
     , mortyUrl = "https://morty.trikeapps.com/tasks/2485582"
     , pivotalUrl = "https://www.pivotaltracker.com/story/show/154507088"
+    , priority = MortyAPI.Models.HighestPriority
     , requestedBy = Just "John Black"
     , taskType = MortyAPI.Models.Feature
     }
@@ -40,6 +41,7 @@ secondTask =
     , estimate = Nothing
     , mortyUrl = "https://morty.trikeapps.com/tasks/2485504"
     , pivotalUrl = "https://www.pivotaltracker.com/story/show/154269718"
+    , priority = MortyAPI.Models.SecondHighestPriority
     , requestedBy = Just "Bill Fring"
     , taskType = MortyAPI.Models.Chore
     }
@@ -54,6 +56,7 @@ thirdTask =
     , estimate = Just 6
     , mortyUrl = "https://morty.trikeapps.com/tasks/2485277"
     , pivotalUrl = "https://www.pivotaltracker.com/story/show/152743157"
+    , priority = MortyAPI.Models.ThirdHighestPriority
     , requestedBy = Just "Matt Bixby"
     , taskType = MortyAPI.Models.Feature
     }
@@ -69,6 +72,7 @@ fourthTask =
     , mortyUrl = "https://morty.trikeapps.com/tasks/2485348"
     , pivotalUrl = "https://www.pivotaltracker.com/story/show/153040253"
     , requestedBy = Just "Matt Bixby"
+    , priority = MortyAPI.Models.LowerPriority
     , taskType = MortyAPI.Models.Feature
     }
 
@@ -82,6 +86,7 @@ fifthTask =
     , estimate = Just 4
     , mortyUrl = "https://morty.trikeapps.com/tasks/2485581"
     , pivotalUrl = "https://www.pivotaltracker.com/story/show/154506909"
+    , priority = MortyAPI.Models.LowerPriority
     , requestedBy = Just "Kris D'Angelici"
     , taskType = MortyAPI.Models.Feature
     }
@@ -96,6 +101,7 @@ sixthTask =
     , estimate = Just 6
     , mortyUrl = "https://morty.trikeapps.com/tasks/2485461"
     , pivotalUrl = "https://www.pivotaltracker.com/story/show/153866866"
+    , priority = MortyAPI.Models.LowerPriority
     , requestedBy = Just "Kris D'Angelici"
     , taskType = MortyAPI.Models.Feature
     }
