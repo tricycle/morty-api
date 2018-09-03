@@ -8,12 +8,14 @@ module MortyAPI.Commands exposing (..)
 @docs KanbanLanesForUserParameters
 @docs TasksParameters
 @docs TaskParameters
+@docs TeamsParameters
 
 @docs getCurrentUserCommand
 @docs getKanbanLanesForTeam
 @docs getKanbanLanesForUser
 @docs getTaskCommand
 @docs getTasksCommand
+@docs getTeams
 @docs postTaskApproachCommand
 @docs putTaskUpdateCommand
 
@@ -87,6 +89,15 @@ type alias TasksParameters a =
     , taskScope : Maybe String
     , taskScopeParam : Maybe String
     , msgType : RemoteData.WebData (List MortyAPI.Types.Task) -> a
+    }
+
+
+{-| Parameters required to retrieve a list of teams
+-}
+type alias TeamsParameters a =
+    { mortyApiToken : String
+    , mortyHost : String
+    , msgType : RemoteData.WebData MortyAPI.Types.TeamsSuccessResponse -> a
     }
 
 
@@ -224,5 +235,18 @@ getKanbanLanesForUser parameters =
             parameters.mortyHost ++ "/api/users/" ++ toString parameters.userId ++ "/kanban_lanes.json?api_token=" ++ parameters.mortyApiToken
     in
         Http.get url MortyAPI.Decoders.decodeKanbanLanesSuccessResponse
+            |> RemoteData.sendRequest
+            |> Cmd.map parameters.msgType
+
+
+{-| Retrieves all teams and their members
+-}
+getTeams : TeamsParameters a -> Cmd a
+getTeams parameters =
+    let
+        url =
+            parameters.mortyHost ++ "/api/v3/teams.json?api_token=" ++ parameters.mortyApiToken
+    in
+        Http.get url MortyAPI.Decoders.decodeTeamsSuccessResponse
             |> RemoteData.sendRequest
             |> Cmd.map parameters.msgType

@@ -11,6 +11,7 @@ module MortyAPI.TestFactories exposing (..)
 @docs firstUser
 @docs secondUser
 @docs kanbanLanesSuccessResponse
+@docs teamsSuccessResponse
 
 -}
 
@@ -149,5 +150,32 @@ kanbanLanesSuccessResponse =
             }
         , id = "Team: Bellroy Tech"
         , dataType = "kanban_lanes"
+        }
+    }
+
+
+{-| A dummy full Teams response from the API
+-}
+teamsSuccessResponse : MortyAPI.Types.TeamsSuccessResponse
+teamsSuccessResponse =
+    { data =
+        { attributes =
+            [ { id = 1
+              , identifier = Nothing
+              , name = "Bellroy Tech Team"
+              , members =
+                    [ { id = 24
+                      , fullName = "Catherine Truscott"
+                      , email = "catherine.truscott@bellroy.com"
+                      , seniority = "Senior"
+                      }
+                    , { id = 36
+                      , fullName = "Chris D'Aloisio"
+                      , email = "chris.daloisio@bellroy.com"
+                      , seniority = "Senior"
+                      }
+                    ]
+              }
+            ]
         }
     }

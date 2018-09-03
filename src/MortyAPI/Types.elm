@@ -13,6 +13,10 @@ module MortyAPI.Types
         , KanbanTaskType(..)
         , KanbanUser
         , Task
+        , TeamsData
+        , TeamsSuccessResponse
+        , Team
+        , TeamMember
         , User
         )
 
@@ -34,6 +38,10 @@ module MortyAPI.Types
 @docs KanbanTaskType
 @docs KanbanUser
 @docs Task
+@docs Team
+@docs TeamMember
+@docs TeamsData
+@docs TeamsSuccessResponse
 @docs User
 
 -}
@@ -172,6 +180,41 @@ type alias Task =
     , predictionGroupId : Maybe Int
     , predictionJudgementAt : Maybe String
     , midLevelHourEstimate : Maybe Int
+    }
+
+
+{-| The "data" content of the JSON API compliant response.
+-}
+type alias TeamsData =
+    { attributes : List Team
+    }
+
+
+{-| The full JSON compliant response.
+-}
+type alias TeamsSuccessResponse =
+    { data : TeamsData
+    }
+
+
+{-| The record type returned by asking Morty for Teams via `MortyAPI.Commands.getTeamsCommand`
+-}
+type alias Team =
+    { id : Int
+    , identifier : Maybe String
+    , name : String
+    , members : List TeamMember
+    }
+
+
+{-| The record type returned by asking Morty for Teams via `MortyAPI.Commands.getTeamsCommand` and
+representing the team members in the team
+-}
+type alias TeamMember =
+    { id : Int
+    , fullName : String
+    , email : String
+    , seniority : String
     }
 
 

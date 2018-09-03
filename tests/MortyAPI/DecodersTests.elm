@@ -10,7 +10,60 @@ import MortyAPI.TestFactories
 suite : Test
 suite =
     describe "MortyDecoders"
-        [ describe "decodeKanbanLanesSuccessResponse"
+        [ describe "decodeTeamsSuccessResponse"
+            [ test "data is decoded properly" <|
+                \() ->
+                    let
+                        data =
+                            """
+                            {
+                               "jsonapi":{
+                                  "version":"1.0"
+                               },
+                               "data":{
+                                  "attributes":[
+                                     {
+                                        "id":1,
+                                        "created_at":"2014-11-25T15:25:11.288+11:00",
+                                        "updated_at":"2018-05-07T08:41:36.985+10:00",
+                                        "name":"Bellroy Tech Team",
+                                        "identifier":null,
+                                        "members":[
+                                           {
+                                              "id":24,
+                                              "created_at":"2014-11-20T17:50:58.823+11:00",
+                                              "updated_at":"2018-08-22T13:07:52.621+10:00",
+                                              "full_name":"Catherine Truscott",
+                                              "email":"catherine.truscott@bellroy.com",
+                                              "seniority":"Senior"
+                                           },
+                                           {
+                                              "id":36,
+                                              "created_at":"2014-11-20T17:51:00.424+11:00",
+                                              "updated_at":"2018-08-30T16:34:24.438+10:00",
+                                              "full_name":"Chris D'Aloisio",
+                                              "email":"chris.daloisio@bellroy.com",
+                                              "seniority":"Senior"
+                                           }
+                                        ]
+                                     }
+                                  ]
+                               }
+                            }
+                            """
+
+                        decoder =
+                            MortyAPI.Decoders.decodeTeamsSuccessResponse
+
+                        decodedOutput =
+                            Json.Decode.decodeString decoder data
+
+                        expectedResult =
+                            (Ok MortyAPI.TestFactories.teamsSuccessResponse)
+                    in
+                        Expect.equal decodedOutput expectedResult
+            ]
+        , describe "decodeKanbanLanesSuccessResponse"
             [ test "data is decoded properly" <|
                 \() ->
                     let
