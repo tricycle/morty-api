@@ -24,7 +24,7 @@ import Json.Decode
 import Maybe
 import MortyAPI.Decoders
 import MortyAPI.Encoders
-import MortyAPI.Models
+import MortyAPI.Types
 import RemoteData
 import Time
 
@@ -34,7 +34,7 @@ import Time
 type alias ApproachParameters a =
     { mortyApiToken : String
     , mortyHost : String
-    , msgType : RemoteData.WebData MortyAPI.Models.Approach -> a
+    , msgType : RemoteData.WebData MortyAPI.Types.Approach -> a
     }
 
 
@@ -43,7 +43,7 @@ type alias ApproachParameters a =
 type alias CurrentUserParameters a =
     { mortyApiToken : String
     , mortyHost : String
-    , msgType : RemoteData.WebData MortyAPI.Models.User -> a
+    , msgType : RemoteData.WebData MortyAPI.Types.User -> a
     }
 
 
@@ -53,7 +53,7 @@ type alias KanbanLanesForTeamParameters a =
     { mortyApiToken : String
     , mortyHost : String
     , teamId : Int
-    , msgType : RemoteData.WebData MortyAPI.Models.KanbanLanesSuccessResponse -> a
+    , msgType : RemoteData.WebData MortyAPI.Types.KanbanLanesSuccessResponse -> a
     }
 
 
@@ -63,7 +63,7 @@ type alias KanbanLanesForUserParameters a =
     { mortyApiToken : String
     , mortyHost : String
     , userId : Int
-    , msgType : RemoteData.WebData MortyAPI.Models.KanbanLanesSuccessResponse -> a
+    , msgType : RemoteData.WebData MortyAPI.Types.KanbanLanesSuccessResponse -> a
     }
 
 
@@ -73,7 +73,7 @@ type alias TaskParameters a =
     { mortyApiToken : String
     , mortyHost : String
     , taskId : Int
-    , msgType : RemoteData.WebData MortyAPI.Models.Task -> a
+    , msgType : RemoteData.WebData MortyAPI.Types.Task -> a
     }
 
 
@@ -86,7 +86,7 @@ type alias TasksParameters a =
     , ownerId : Maybe Int
     , taskScope : Maybe String
     , taskScopeParam : Maybe String
-    , msgType : RemoteData.WebData (List MortyAPI.Models.Task) -> a
+    , msgType : RemoteData.WebData (List MortyAPI.Types.Task) -> a
     }
 
 
@@ -158,7 +158,7 @@ getTaskCommand parameters =
 
 {-| Updates the properties of a task using a PUT call to the API
 -}
-putTaskUpdateCommand : TaskParameters a -> MortyAPI.Models.Task -> Cmd a
+putTaskUpdateCommand : TaskParameters a -> MortyAPI.Types.Task -> Cmd a
 putTaskUpdateCommand parameters updatedTask =
     let
         url =
@@ -189,7 +189,7 @@ putTaskUpdateCommand parameters updatedTask =
 
 {-| POSTs a new task approach to the API
 -}
-postTaskApproachCommand : ApproachParameters a -> MortyAPI.Models.Approach -> Cmd a
+postTaskApproachCommand : ApproachParameters a -> MortyAPI.Types.Approach -> Cmd a
 postTaskApproachCommand parameters approach =
     let
         url =

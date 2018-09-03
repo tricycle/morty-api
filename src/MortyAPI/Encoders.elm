@@ -1,17 +1,17 @@
 module MortyAPI.Encoders exposing (encodeApproach, encodeTask)
 
-{-| Provides encoders for converting record types published by MortyAPI.Models into JSON responses.
+{-| Provides encoders for converting record types published by MortyAPI.Types into JSON responses.
 
 @docs encodeApproach
 @docs encodeTask
 
 -}
 
-import MortyAPI.Models exposing (User, Task, Approach)
+import MortyAPI.Types exposing (User, Task, Approach)
 import Json.Encode exposing (object, Value, int, null, string, float)
 
 
-{-| Encode MortyAPI.Models.Task into JSON.
+{-| Encode MortyAPI.Types.Task into JSON.
 -}
 encodeTask : Task -> Value
 encodeTask task =
@@ -37,7 +37,7 @@ encodeTask task =
             ]
 
 
-{-| Encode MortyAPI.Models.Approach into JSON.
+{-| Encode MortyAPI.Types.Approach into JSON.
 -}
 encodeApproach : Approach -> Value
 encodeApproach approach =

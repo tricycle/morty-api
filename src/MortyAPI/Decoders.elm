@@ -6,7 +6,7 @@ module MortyAPI.Decoders
         , decodeUser
         )
 
-{-| Provides decoders for converting JSON responses into record types published by MortyAPI.Models.
+{-| Provides decoders for converting JSON responses into record types published by MortyAPI.Types.
 
 @docs decodeApproach
 @docs decodeKanbanLanesSuccessResponse
@@ -17,14 +17,14 @@ module MortyAPI.Decoders
 
 import Json.Decode as JD
 import Json.Decode.Pipeline as JDP
-import MortyAPI.Models
+import MortyAPI.Types
 
 
-{-| Provides a decoder for JSON -> MortyAPI.Models.Approach
+{-| Provides a decoder for JSON -> MortyAPI.Types.Approach
 -}
-decodeApproach : JD.Decoder MortyAPI.Models.Approach
+decodeApproach : JD.Decoder MortyAPI.Types.Approach
 decodeApproach =
-    JDP.decode MortyAPI.Models.Approach
+    JDP.decode MortyAPI.Types.Approach
         |> JDP.required "id" JD.int
         |> JDP.required "task_id" JD.int
         |> JDP.required "user" decodeUser
@@ -35,19 +35,19 @@ decodeApproach =
         |> JDP.required "junior_hours" (JD.nullable JD.float)
 
 
-{-| Provides a decoder for JSON -> MortyAPI.Models.KanbanLanesSuccessResponse
+{-| Provides a decoder for JSON -> MortyAPI.Types.KanbanLanesSuccessResponse
 -}
-decodeKanbanLanesSuccessResponse : JD.Decoder MortyAPI.Models.KanbanLanesSuccessResponse
+decodeKanbanLanesSuccessResponse : JD.Decoder MortyAPI.Types.KanbanLanesSuccessResponse
 decodeKanbanLanesSuccessResponse =
-    JDP.decode MortyAPI.Models.KanbanLanesSuccessResponse
+    JDP.decode MortyAPI.Types.KanbanLanesSuccessResponse
         |> JDP.required "data" decodeKanbanLanesData
 
 
-{-| Provides a decoder for JSON -> MortyAPI.Models.Task
+{-| Provides a decoder for JSON -> MortyAPI.Types.Task
 -}
-decodeTask : JD.Decoder MortyAPI.Models.Task
+decodeTask : JD.Decoder MortyAPI.Types.Task
 decodeTask =
-    JDP.decode MortyAPI.Models.Task
+    JDP.decode MortyAPI.Types.Task
         |> JDP.required "id" JD.int
         |> JDP.required "title" JD.string
         |> JDP.optional "description" JD.string ""
@@ -63,11 +63,11 @@ decodeTask =
         |> JDP.required "mid_level_hour_estimate" (JD.nullable JD.int)
 
 
-{-| Provides a decoder for JSON -> MortyAPI.Models.User
+{-| Provides a decoder for JSON -> MortyAPI.Types.User
 -}
-decodeUser : JD.Decoder MortyAPI.Models.User
+decodeUser : JD.Decoder MortyAPI.Types.User
 decodeUser =
-    JDP.decode MortyAPI.Models.User
+    JDP.decode MortyAPI.Types.User
         |> JDP.required "id" JD.int
         |> JDP.required "full_name" JD.string
         |> JDP.required "email" JD.string
@@ -75,46 +75,46 @@ decodeUser =
         |> JDP.required "prediction_book_api_token" (JD.nullable JD.string)
 
 
-decodeKanbanTaskType : JD.Decoder MortyAPI.Models.KanbanTaskType
+decodeKanbanTaskType : JD.Decoder MortyAPI.Types.KanbanTaskType
 decodeKanbanTaskType =
     JD.string
         |> JD.andThen
             (\str ->
                 case str of
                     "feature" ->
-                        JD.succeed MortyAPI.Models.Feature
+                        JD.succeed MortyAPI.Types.Feature
 
                     "chore" ->
-                        JD.succeed MortyAPI.Models.Chore
+                        JD.succeed MortyAPI.Types.Chore
 
                     _ ->
-                        JD.succeed MortyAPI.Models.Bug
+                        JD.succeed MortyAPI.Types.Bug
             )
 
 
-decodeKanbanTaskPriority : JD.Decoder MortyAPI.Models.KanbanTaskPriority
+decodeKanbanTaskPriority : JD.Decoder MortyAPI.Types.KanbanTaskPriority
 decodeKanbanTaskPriority =
     (JD.nullable JD.int)
         |> JD.andThen
             (\maybeString ->
                 case maybeString of
                     Just 1 ->
-                        JD.succeed MortyAPI.Models.HighestPriority
+                        JD.succeed MortyAPI.Types.HighestPriority
 
                     Just 2 ->
-                        JD.succeed MortyAPI.Models.SecondHighestPriority
+                        JD.succeed MortyAPI.Types.SecondHighestPriority
 
                     Just 3 ->
-                        JD.succeed MortyAPI.Models.ThirdHighestPriority
+                        JD.succeed MortyAPI.Types.ThirdHighestPriority
 
                     _ ->
-                        JD.succeed MortyAPI.Models.LowerPriority
+                        JD.succeed MortyAPI.Types.LowerPriority
             )
 
 
-decodeKanbanTask : JD.Decoder MortyAPI.Models.KanbanTask
+decodeKanbanTask : JD.Decoder MortyAPI.Types.KanbanTask
 decodeKanbanTask =
-    JDP.decode MortyAPI.Models.KanbanTask
+    JDP.decode MortyAPI.Types.KanbanTask
         |> JDP.required "days_since_last_changed" JD.int
         |> JDP.required "description" JD.string
         |> JDP.required "estimate" (JD.nullable JD.int)
@@ -125,44 +125,44 @@ decodeKanbanTask =
         |> JDP.required "task_type" decodeKanbanTaskType
 
 
-decodeKanbanUser : JD.Decoder MortyAPI.Models.KanbanUser
+decodeKanbanUser : JD.Decoder MortyAPI.Types.KanbanUser
 decodeKanbanUser =
-    JDP.decode MortyAPI.Models.KanbanUser
+    JDP.decode MortyAPI.Types.KanbanUser
         |> JDP.required "email" JD.string
         |> JDP.required "full_name" JD.string
 
 
-decodeKanbanStageStatusFields : JD.Decoder MortyAPI.Models.KanbanStageStatusFields
+decodeKanbanStageStatusFields : JD.Decoder MortyAPI.Types.KanbanStageStatusFields
 decodeKanbanStageStatusFields =
-    JDP.decode MortyAPI.Models.KanbanStageStatusFields
+    JDP.decode MortyAPI.Types.KanbanStageStatusFields
         |> JDP.required "status" JD.string
         |> JDP.required "message" (JD.nullable JD.string)
 
 
-decodeKanbanStageStatus : JD.Decoder MortyAPI.Models.KanbanStageStatus
+decodeKanbanStageStatus : JD.Decoder MortyAPI.Types.KanbanStageStatus
 decodeKanbanStageStatus =
     decodeKanbanStageStatusFields
         |> JD.andThen
             (\fields ->
                 case fields.status of
                     "ok" ->
-                        JD.succeed MortyAPI.Models.Ok
+                        JD.succeed MortyAPI.Types.Ok
 
                     _ ->
-                        JD.succeed (MortyAPI.Models.Problem (Maybe.withDefault "no message!" fields.message))
+                        JD.succeed (MortyAPI.Types.Problem (Maybe.withDefault "no message!" fields.message))
             )
 
 
-decodeKanbanStage : JD.Decoder MortyAPI.Models.KanbanStage
+decodeKanbanStage : JD.Decoder MortyAPI.Types.KanbanStage
 decodeKanbanStage =
-    JDP.decode MortyAPI.Models.KanbanStage
+    JDP.decode MortyAPI.Types.KanbanStage
         |> JDP.required "result" decodeKanbanStageStatus
         |> JDP.required "tasks" (JD.list decodeKanbanTask)
 
 
-decodeKanbanLane : JD.Decoder MortyAPI.Models.KanbanLane
+decodeKanbanLane : JD.Decoder MortyAPI.Types.KanbanLane
 decodeKanbanLane =
-    JDP.decode MortyAPI.Models.KanbanLane
+    JDP.decode MortyAPI.Types.KanbanLane
         |> JDP.required "accepted_stage" decodeKanbanStage
         |> JDP.required "delivered_stage" decodeKanbanStage
         |> JDP.required "in_progress_stage" decodeKanbanStage
@@ -172,16 +172,16 @@ decodeKanbanLane =
         |> JDP.required "user" decodeKanbanUser
 
 
-decodeKanbanLanesAttributes : JD.Decoder MortyAPI.Models.KanbanLanes
+decodeKanbanLanesAttributes : JD.Decoder MortyAPI.Types.KanbanLanes
 decodeKanbanLanesAttributes =
-    JDP.decode MortyAPI.Models.KanbanLanes
+    JDP.decode MortyAPI.Types.KanbanLanes
         |> JDP.required "label" JD.string
         |> JDP.required "kanban_lanes" (JD.list decodeKanbanLane)
 
 
-decodeKanbanLanesData : JD.Decoder MortyAPI.Models.KanbanLanesData
+decodeKanbanLanesData : JD.Decoder MortyAPI.Types.KanbanLanesData
 decodeKanbanLanesData =
-    JDP.decode MortyAPI.Models.KanbanLanesData
+    JDP.decode MortyAPI.Types.KanbanLanesData
         |> JDP.required "attributes" decodeKanbanLanesAttributes
         |> JDP.required "id" JD.string
         |> JDP.required "type" JD.string

@@ -1,4 +1,4 @@
-module MortyAPI.Models
+module MortyAPI.Types
     exposing
         ( Approach
         , KanbanLanesData

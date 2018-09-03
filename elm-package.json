@@ -10,7 +10,7 @@
         "MortyAPI.Commands",
         "MortyAPI.Decoders",
         "MortyAPI.Encoders",
-        "MortyAPI.Models",
+        "MortyAPI.Types",
         "MortyAPI.TestFactories",
         "MortyAPI.Utilities"
     ],
