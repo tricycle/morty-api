@@ -1,4 +1,7 @@
-module MortyAPI.Utilities exposing (kanbanLaneStageList, allKanbanLanesProblems)
+module MortyAPI.Utilities exposing
+    ( kanbanLaneStageList
+    , allKanbanLanesProblems
+    )
 
 {-| Provides utility functions for MortyAPI.Types.
 

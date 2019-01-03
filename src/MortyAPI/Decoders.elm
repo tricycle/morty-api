@@ -1,11 +1,10 @@
-module MortyAPI.Decoders
-    exposing
-        ( decodeApproach
-        , decodeKanbanLanesSuccessResponse
-        , decodeTask
-        , decodeTeamsSuccessResponse
-        , decodeUser
-        )
+module MortyAPI.Decoders exposing
+    ( decodeApproach
+    , decodeKanbanLanesSuccessResponse
+    , decodeTask
+    , decodeTeamsSuccessResponse
+    , decodeUser
+    )
 
 {-| Provides decoders for converting JSON responses into record types published by MortyAPI.Types.
 
@@ -18,7 +17,7 @@ module MortyAPI.Decoders
 -}
 
 import Json.Decode exposing (Decoder, andThen, float, int, list, nullable, string, succeed)
-import Json.Decode.Pipeline exposing (decode, optional, required)
+import Json.Decode.Pipeline exposing (optional, required)
 import MortyAPI.Types
 
 
@@ -26,7 +25,7 @@ import MortyAPI.Types
 -}
 decodeApproach : Decoder MortyAPI.Types.Approach
 decodeApproach =
-    decode MortyAPI.Types.Approach
+    succeed MortyAPI.Types.Approach
         |> required "id" int
         |> required "task_id" int
         |> required "user" decodeUser
@@ -41,7 +40,7 @@ decodeApproach =
 -}
 decodeKanbanLanesSuccessResponse : Decoder MortyAPI.Types.KanbanLanesSuccessResponse
 decodeKanbanLanesSuccessResponse =
-    decode MortyAPI.Types.KanbanLanesSuccessResponse
+    succeed MortyAPI.Types.KanbanLanesSuccessResponse
         |> required "data" decodeKanbanLanesData
 
 
@@ -49,7 +48,7 @@ decodeKanbanLanesSuccessResponse =
 -}
 decodeTask : Decoder MortyAPI.Types.Task
 decodeTask =
-    decode MortyAPI.Types.Task
+    succeed MortyAPI.Types.Task
         |> required "id" int
         |> required "title" string
         |> optional "description" string ""
@@ -69,7 +68,7 @@ decodeTask =
 -}
 decodeTeamsSuccessResponse : Decoder MortyAPI.Types.TeamsSuccessResponse
 decodeTeamsSuccessResponse =
-    decode MortyAPI.Types.TeamsSuccessResponse
+    succeed MortyAPI.Types.TeamsSuccessResponse
         |> required "data" decodeTeamsData
 
 
@@ -77,7 +76,7 @@ decodeTeamsSuccessResponse =
 -}
 decodeTeam : Decoder MortyAPI.Types.Team
 decodeTeam =
-    decode MortyAPI.Types.Team
+    succeed MortyAPI.Types.Team
         |> required "id" int
         |> required "identifier" (nullable string)
         |> required "name" string
@@ -88,7 +87,7 @@ decodeTeam =
 -}
 decodeUser : Decoder MortyAPI.Types.User
 decodeUser =
-    decode MortyAPI.Types.User
+    succeed MortyAPI.Types.User
         |> required "id" int
         |> required "full_name" string
         |> required "email" string
@@ -115,7 +114,7 @@ decodeKanbanTaskType =
 
 decodeKanbanTaskPriority : Decoder MortyAPI.Types.KanbanTaskPriority
 decodeKanbanTaskPriority =
-    (nullable int)
+    nullable int
         |> andThen
             (\maybeString ->
                 case maybeString of
@@ -135,7 +134,7 @@ decodeKanbanTaskPriority =
 
 decodeKanbanTask : Decoder MortyAPI.Types.KanbanTask
 decodeKanbanTask =
-    decode MortyAPI.Types.KanbanTask
+    succeed MortyAPI.Types.KanbanTask
         |> required "days_since_last_changed" int
         |> required "description" string
         |> required "estimate" (nullable int)
@@ -148,14 +147,14 @@ decodeKanbanTask =
 
 decodeKanbanUser : Decoder MortyAPI.Types.KanbanUser
 decodeKanbanUser =
-    decode MortyAPI.Types.KanbanUser
+    succeed MortyAPI.Types.KanbanUser
         |> required "email" string
         |> required "full_name" string
 
 
 decodeKanbanStageStatusFields : Decoder MortyAPI.Types.KanbanStageStatusFields
 decodeKanbanStageStatusFields =
-    decode MortyAPI.Types.KanbanStageStatusFields
+    succeed MortyAPI.Types.KanbanStageStatusFields
         |> required "status" string
         |> required "message" (nullable string)
 
@@ -176,14 +175,14 @@ decodeKanbanStageStatus =
 
 decodeKanbanStage : Decoder MortyAPI.Types.KanbanStage
 decodeKanbanStage =
-    decode MortyAPI.Types.KanbanStage
+    succeed MortyAPI.Types.KanbanStage
         |> required "result" decodeKanbanStageStatus
         |> required "tasks" (list decodeKanbanTask)
 
 
 decodeKanbanLane : Decoder MortyAPI.Types.KanbanLane
 decodeKanbanLane =
-    decode MortyAPI.Types.KanbanLane
+    succeed MortyAPI.Types.KanbanLane
         |> required "accepted_stage" decodeKanbanStage
         |> required "delivered_stage" decodeKanbanStage
         |> required "in_progress_stage" decodeKanbanStage
@@ -195,14 +194,14 @@ decodeKanbanLane =
 
 decodeKanbanLanesAttributes : Decoder MortyAPI.Types.KanbanLanes
 decodeKanbanLanesAttributes =
-    decode MortyAPI.Types.KanbanLanes
+    succeed MortyAPI.Types.KanbanLanes
         |> required "label" string
         |> required "kanban_lanes" (list decodeKanbanLane)
 
 
 decodeKanbanLanesData : Decoder MortyAPI.Types.KanbanLanesData
 decodeKanbanLanesData =
-    decode MortyAPI.Types.KanbanLanesData
+    succeed MortyAPI.Types.KanbanLanesData
         |> required "attributes" decodeKanbanLanesAttributes
         |> required "id" string
         |> required "type" string
@@ -210,13 +209,13 @@ decodeKanbanLanesData =
 
 decodeTeamsData : Decoder MortyAPI.Types.TeamsData
 decodeTeamsData =
-    decode MortyAPI.Types.TeamsData
+    succeed MortyAPI.Types.TeamsData
         |> required "attributes" (list decodeTeam)
 
 
 decodeTeamMember : Decoder MortyAPI.Types.TeamMember
 decodeTeamMember =
-    decode MortyAPI.Types.TeamMember
+    succeed MortyAPI.Types.TeamMember
         |> required "id" int
         |> required "full_name" string
         |> required "email" string

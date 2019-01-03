@@ -1,4 +1,7 @@
-module MortyAPI.Encoders exposing (encodeApproach, encodeTask)
+module MortyAPI.Encoders exposing
+    ( encodeApproach
+    , encodeTask
+    )
 
 {-| Provides encoders for converting record types published by MortyAPI.Types into JSON responses.
 
@@ -7,8 +10,8 @@ module MortyAPI.Encoders exposing (encodeApproach, encodeTask)
 
 -}
 
-import MortyAPI.Types exposing (User, Task, Approach)
-import Json.Encode exposing (object, Value, int, null, string, float)
+import Json.Encode exposing (Value, float, int, null, object, string)
+import MortyAPI.Types exposing (Approach, Task)
 
 
 {-| Encode MortyAPI.Types.Task into JSON.
@@ -25,16 +28,16 @@ encodeTask task =
         estimateValue =
             task.midLevelHourEstimate |> Maybe.map int |> Maybe.withDefault null
     in
-        Json.Encode.object
-            [ ( "task"
-              , Json.Encode.object
-                    [ ( "id", int task.id )
-                    , ( "prediction_group_id", predictionGroupIdValue )
-                    , ( "prediction_judgement_at", predictionJudgementAtValue )
-                    , ( "mid_level_hour_estimate", estimateValue )
-                    ]
-              )
-            ]
+    Json.Encode.object
+        [ ( "task"
+          , Json.Encode.object
+                [ ( "id", int task.id )
+                , ( "prediction_group_id", predictionGroupIdValue )
+                , ( "prediction_judgement_at", predictionJudgementAtValue )
+                , ( "mid_level_hour_estimate", estimateValue )
+                ]
+          )
+        ]
 
 
 {-| Encode MortyAPI.Types.Approach into JSON.
@@ -84,9 +87,9 @@ encodeApproach approach =
                 ++ midLevelHoursList
                 ++ juniorHoursList
     in
-        Json.Encode.object
-            [ ( "task_approach"
-              , Json.Encode.object
-                    elements
-              )
-            ]
+    Json.Encode.object
+        [ ( "task_approach"
+          , Json.Encode.object
+                elements
+          )
+        ]

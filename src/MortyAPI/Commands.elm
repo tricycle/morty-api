@@ -1,4 +1,20 @@
-module MortyAPI.Commands exposing (..)
+module MortyAPI.Commands exposing
+    ( ApproachParameters
+    , CurrentUserParameters
+    , KanbanLanesForTeamParameters
+    , KanbanLanesForUserParameters
+    , TasksParameters
+    , TaskParameters
+    , TeamsParameters
+    , getCurrentUserCommand
+    , getKanbanLanesForTeam
+    , getKanbanLanesForUser
+    , getTaskCommand
+    , getTasksCommand
+    , getTeams
+    , postTaskApproachCommand
+    , putTaskUpdateCommand
+    )
 
 {-| Provides commands and command parameters for making API calls.
 
@@ -28,7 +44,6 @@ import MortyAPI.Decoders
 import MortyAPI.Encoders
 import MortyAPI.Types
 import RemoteData
-import Time
 
 
 {-| Parameters required to POST a new Task Approach
@@ -109,9 +124,10 @@ getCurrentUserCommand parameters =
         url =
             parameters.mortyHost ++ "/api/v2/current_users/me.json?api_token=" ++ parameters.mortyApiToken
     in
-        Http.get url MortyAPI.Decoders.decodeUser
-            |> RemoteData.sendRequest
-            |> Cmd.map parameters.msgType
+    Http.get
+        { url = url
+        , expect = Http.expectJson (RemoteData.fromResult >> parameters.msgType) MortyAPI.Decoders.decodeUser
+        }
 
 
 {-| Gets a list of tasks matching the filter criteria from the API
@@ -137,7 +153,7 @@ getTasksCommand parameters =
                 ++ "owner_type="
                 ++ ownerType
                 ++ "&owner_id="
-                ++ toString ownerId
+                ++ String.fromInt ownerId
                 ++ "&scope="
                 ++ taskScope
                 ++ "&scope_param="
@@ -145,9 +161,10 @@ getTasksCommand parameters =
                 ++ "&api_token="
                 ++ parameters.mortyApiToken
     in
-        Http.get url (Json.Decode.list MortyAPI.Decoders.decodeTask)
-            |> RemoteData.sendRequest
-            |> Cmd.map parameters.msgType
+    Http.get
+        { url = url
+        , expect = Http.expectJson (RemoteData.fromResult >> parameters.msgType) (Json.Decode.list MortyAPI.Decoders.decodeTask)
+        }
 
 
 {-| Gets a task from the API
@@ -158,13 +175,11 @@ getTaskCommand parameters =
         url =
             parameters.mortyHost
                 ++ "/api/v2/tasks/"
-                ++ toString parameters.taskId
+                ++ String.fromInt parameters.taskId
                 ++ ".json?api_token="
                 ++ parameters.mortyApiToken
     in
-        Http.get url MortyAPI.Decoders.decodeTask
-            |> RemoteData.sendRequest
-            |> Cmd.map parameters.msgType
+    Http.get { url = url, expect = Http.expectJson (RemoteData.fromResult >> parameters.msgType) MortyAPI.Decoders.decodeTask }
 
 
 {-| Updates the properties of a task using a PUT call to the API
@@ -175,7 +190,7 @@ putTaskUpdateCommand parameters updatedTask =
         url =
             parameters.mortyHost
                 ++ "/api/v2/tasks/"
-                ++ toString parameters.taskId
+                ++ String.fromInt parameters.taskId
                 ++ ".json?api_token="
                 ++ parameters.mortyApiToken
 
@@ -188,14 +203,12 @@ putTaskUpdateCommand parameters updatedTask =
                 , headers = []
                 , url = url
                 , body = requestBody
-                , expect = Http.expectJson MortyAPI.Decoders.decodeTask
-                , timeout = Just (30 * Time.second)
-                , withCredentials = False
+                , expect = Http.expectJson (RemoteData.fromResult >> parameters.msgType) MortyAPI.Decoders.decodeTask
+                , timeout = Just 30000.0
+                , tracker = Nothing
                 }
     in
-        request_
-            |> RemoteData.sendRequest
-            |> Cmd.map parameters.msgType
+    request_
 
 
 {-| POSTs a new task approach to the API
@@ -208,9 +221,11 @@ postTaskApproachCommand parameters approach =
                 ++ "/api/v2/task_approaches.json?api_token="
                 ++ parameters.mortyApiToken
     in
-        Http.post url (Http.jsonBody <| MortyAPI.Encoders.encodeApproach approach) MortyAPI.Decoders.decodeApproach
-            |> RemoteData.sendRequest
-            |> Cmd.map parameters.msgType
+    Http.post
+        { url = url
+        , body = Http.jsonBody <| MortyAPI.Encoders.encodeApproach approach
+        , expect = Http.expectJson (RemoteData.fromResult >> parameters.msgType) MortyAPI.Decoders.decodeApproach
+        }
 
 
 {-| Retrieves all kanban lanes for a team
@@ -219,11 +234,9 @@ getKanbanLanesForTeam : KanbanLanesForTeamParameters a -> Cmd a
 getKanbanLanesForTeam parameters =
     let
         url =
-            parameters.mortyHost ++ "/api/teams/" ++ toString parameters.teamId ++ "/kanban_lanes.json?api_token=" ++ parameters.mortyApiToken
+            parameters.mortyHost ++ "/api/teams/" ++ String.fromInt parameters.teamId ++ "/kanban_lanes.json?api_token=" ++ parameters.mortyApiToken
     in
-        Http.get url MortyAPI.Decoders.decodeKanbanLanesSuccessResponse
-            |> RemoteData.sendRequest
-            |> Cmd.map parameters.msgType
+    Http.get { url = url, expect = Http.expectJson (RemoteData.fromResult >> parameters.msgType) MortyAPI.Decoders.decodeKanbanLanesSuccessResponse }
 
 
 {-| Retrieves all kanban lanes for a user
@@ -232,11 +245,9 @@ getKanbanLanesForUser : KanbanLanesForUserParameters a -> Cmd a
 getKanbanLanesForUser parameters =
     let
         url =
-            parameters.mortyHost ++ "/api/users/" ++ toString parameters.userId ++ "/kanban_lanes.json?api_token=" ++ parameters.mortyApiToken
+            parameters.mortyHost ++ "/api/users/" ++ String.fromInt parameters.userId ++ "/kanban_lanes.json?api_token=" ++ parameters.mortyApiToken
     in
-        Http.get url MortyAPI.Decoders.decodeKanbanLanesSuccessResponse
-            |> RemoteData.sendRequest
-            |> Cmd.map parameters.msgType
+    Http.get { url = url, expect = Http.expectJson (RemoteData.fromResult >> parameters.msgType) MortyAPI.Decoders.decodeKanbanLanesSuccessResponse }
 
 
 {-| Retrieves all teams and their members
@@ -247,6 +258,4 @@ getTeams parameters =
         url =
             parameters.mortyHost ++ "/api/v3/teams.json?api_token=" ++ parameters.mortyApiToken
     in
-        Http.get url MortyAPI.Decoders.decodeTeamsSuccessResponse
-            |> RemoteData.sendRequest
-            |> Cmd.map parameters.msgType
+    Http.get { url = url, expect = Http.expectJson (RemoteData.fromResult >> parameters.msgType) MortyAPI.Decoders.decodeTeamsSuccessResponse }

@@ -1,10 +1,10 @@
-module MortyAPI.DecodersTests exposing (..)
+module MortyAPI.DecodersTests exposing (suite)
 
 import Expect
 import Json.Decode
 import MortyAPI.Decoders
-import Test exposing (..)
 import MortyAPI.TestFactories
+import Test exposing (..)
 
 
 suite : Test
@@ -59,9 +59,9 @@ suite =
                             Json.Decode.decodeString decoder data
 
                         expectedResult =
-                            (Ok MortyAPI.TestFactories.teamsSuccessResponse)
+                            Ok MortyAPI.TestFactories.teamsSuccessResponse
                     in
-                        Expect.equal decodedOutput expectedResult
+                    Expect.equal decodedOutput expectedResult
             ]
         , describe "decodeKanbanLanesSuccessResponse"
             [ test "data is decoded properly" <|
@@ -227,9 +227,9 @@ suite =
                             Json.Decode.decodeString decoder data
 
                         expectedResult =
-                            (Ok MortyAPI.TestFactories.kanbanLanesSuccessResponse)
+                            Ok MortyAPI.TestFactories.kanbanLanesSuccessResponse
                     in
-                        Expect.equal decodedOutput expectedResult
+                    Expect.equal decodedOutput expectedResult
             ]
         , describe "decodeTasks"
             [ test "data is decoded properly" <|
@@ -339,7 +339,7 @@ suite =
                             Json.Decode.decodeString decoder data
 
                         expectedResult =
-                            (Ok
+                            Ok
                                 [ { id = 1369986
                                   , title = "Rename \"Classification Code\" to \"GL Code\" in the UI"
                                   , description = "... and back and forth we go..."
@@ -414,8 +414,7 @@ suite =
                                   , secondsSinceStatusChanged = 78999
                                   }
                                 ]
-                            )
                     in
-                        Expect.equal decodedOutput expectedResult
+                    Expect.equal decodedOutput expectedResult
             ]
         ]

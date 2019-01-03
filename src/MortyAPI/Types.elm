@@ -1,24 +1,23 @@
-module MortyAPI.Types
-    exposing
-        ( Approach
-        , KanbanLanesData
-        , KanbanLanesSuccessResponse
-        , KanbanLane
-        , KanbanLanes
-        , KanbanStage
-        , KanbanStageStatus(..)
-        , KanbanStageStatusFields
-        , KanbanTask
-        , KanbanTaskPriority(..)
-        , KanbanTaskType(..)
-        , KanbanUser
-        , Task
-        , TeamsData
-        , TeamsSuccessResponse
-        , Team
-        , TeamMember
-        , User
-        )
+module MortyAPI.Types exposing
+    ( Approach
+    , KanbanLane
+    , KanbanLanes
+    , KanbanLanesData
+    , KanbanLanesSuccessResponse
+    , KanbanStage
+    , KanbanStageStatus(..)
+    , KanbanStageStatusFields
+    , KanbanTask
+    , KanbanTaskPriority(..)
+    , KanbanTaskType(..)
+    , KanbanUser
+    , Task
+    , Team
+    , TeamMember
+    , TeamsData
+    , TeamsSuccessResponse
+    , User
+    )
 
 {-| This library provides all the models you'll get back from the MortyAPI.
 

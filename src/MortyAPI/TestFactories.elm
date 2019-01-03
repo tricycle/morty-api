@@ -1,4 +1,15 @@
-module MortyAPI.TestFactories exposing (..)
+module MortyAPI.TestFactories exposing
+    ( firstTask
+    , secondTask
+    , thirdTask
+    , fourthTask
+    , fifthTask
+    , sixthTask
+    , firstUser
+    , secondUser
+    , kanbanLanesSuccessResponse
+    , teamsSuccessResponse
+    )
 
 {-| Provides factory methods for testing purposes.
 
