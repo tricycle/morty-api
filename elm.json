@@ -3,7 +3,7 @@
     "name": "tricycle/morty-api",
     "summary": "Morty API",
     "license": "BSD-3-Clause",
-    "version": "4.0.0",
+    "version": "3.0.1",
     "exposed-modules": [
         "MortyAPI.Commands",
         "MortyAPI.Decoders",
