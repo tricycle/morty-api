@@ -51,7 +51,7 @@ import RemoteData
 type alias ApproachParameters a =
     { mortyApiToken : String
     , mortyHost : String
-    , msgType : RemoteData.WebData MortyAPI.Types.Approach -> a
+    , msgType : RemoteData.WebData MortyAPI.Types.TaskApproach -> a
     }
 
 
@@ -213,7 +213,7 @@ putTaskUpdateCommand parameters updatedTask =
 
 {-| POSTs a new task approach to the API
 -}
-postTaskApproachCommand : ApproachParameters a -> MortyAPI.Types.Approach -> Cmd a
+postTaskApproachCommand : ApproachParameters a -> MortyAPI.Types.TaskApproach -> Cmd a
 postTaskApproachCommand parameters approach =
     let
         url =

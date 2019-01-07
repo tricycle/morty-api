@@ -1,6 +1,5 @@
 module MortyAPI.Types exposing
-    ( Approach
-    , KanbanLane
+    ( KanbanLane
     , KanbanLanes
     , KanbanLanesData
     , KanbanLanesSuccessResponse
@@ -12,6 +11,7 @@ module MortyAPI.Types exposing
     , KanbanTaskType(..)
     , KanbanUser
     , Task
+    , TaskApproach
     , Team
     , TeamMember
     , TeamsData
@@ -24,7 +24,6 @@ module MortyAPI.Types exposing
 
 # Definition
 
-@docs Approach
 @docs KanbanLane
 @docs KanbanLanes
 @docs KanbanLanesData
@@ -37,6 +36,7 @@ module MortyAPI.Types exposing
 @docs KanbanTaskType
 @docs KanbanUser
 @docs Task
+@docs TaskApproach
 @docs Team
 @docs TeamMember
 @docs TeamsData
@@ -49,7 +49,7 @@ module MortyAPI.Types exposing
 {-| The Approach to a task. Used to create a new approach or return
 a list of existing approaches when you retrieve a task.
 -}
-type alias Approach =
+type alias TaskApproach =
     { id : Int
     , taskId : Int
     , user : User
@@ -175,7 +175,7 @@ type alias Task =
     , secondsSinceStatusChanged : Int
     , ownedBy : Maybe User
     , requestedBy : Maybe String
-    , taskApproaches : List Approach
+    , taskApproaches : List TaskApproach
     , predictionGroupId : Maybe Int
     , predictionJudgementAt : Maybe String
     , midLevelHourEstimate : Maybe Int

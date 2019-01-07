@@ -21,11 +21,11 @@ import Json.Decode.Pipeline exposing (optional, required)
 import MortyAPI.Types
 
 
-{-| Provides a decoder for JSON -> MortyAPI.Types.Approach
+{-| Provides a decoder for JSON -> MortyAPI.Types.TaskApproach
 -}
-decodeApproach : Decoder MortyAPI.Types.Approach
+decodeApproach : Decoder MortyAPI.Types.TaskApproach
 decodeApproach =
-    succeed MortyAPI.Types.Approach
+    succeed MortyAPI.Types.TaskApproach
         |> required "id" int
         |> required "task_id" int
         |> required "user" decodeUser

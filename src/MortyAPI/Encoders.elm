@@ -11,7 +11,7 @@ module MortyAPI.Encoders exposing
 -}
 
 import Json.Encode exposing (Value, float, int, null, object, string)
-import MortyAPI.Types exposing (Approach, Task)
+import MortyAPI.Types exposing (Task, TaskApproach)
 
 
 {-| Encode MortyAPI.Types.Task into JSON.
@@ -40,9 +40,9 @@ encodeTask task =
         ]
 
 
-{-| Encode MortyAPI.Types.Approach into JSON.
+{-| Encode MortyAPI.Types.TaskApproach into JSON.
 -}
-encodeApproach : Approach -> Value
+encodeApproach : TaskApproach -> Value
 encodeApproach approach =
     let
         myHoursList =
